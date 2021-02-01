@@ -1,0 +1,58 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Company {
+  id Int @default(autoincrement()) @id
+  name String
+  createdAt DateTime
+}
+
+model Line {
+  id Int @default(autoincrement()) @id
+  code String
+  mode String
+  companies Company[]
+  area String?
+  color String?
+  terminal1 String
+  terminal2 String
+  route String?
+  createdAt DateTime
+  establishedAt DateTime?
+}
+
+model Ridership {
+  id Int @default(autoincrement()) @id
+  companyId Int?
+  lineId Int?
+  stopId Int?
+  createdAt DateTime
+  date DateTime
+  company Company? @relation(fields: [companyId], references: [id])
+  pNormalVt
+  pCardNormal
+  pStudent
+  pStudentMonth
+  pVtMonth
+  pTotal
+  iBusBus
+  fFree
+  fFreeStudent
+  total
+  line Line? @relation(fields: [lineId], references: [id])
+  stop Stop? @relation(fields: [stopId], references: [id])
+}
+
+model Stop {
+  id Int @default(autoincrement()) @id
+  name String
+  lineId Int?
+  line Line? @relation(fields: [lineId], references: [id])
+  createdAt DateTime
+}
