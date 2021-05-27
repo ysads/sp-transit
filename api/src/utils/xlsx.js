@@ -1,7 +1,7 @@
 const XLSX = require('xlsx')
 
 const encodeCell = (r, c) => {
-  return XLSX.utils.encode_cell({ r: r, c: c })
+  return XLSX.utils.encode_cell({ r, c })
 }
 
 const deleteRow = (ws, rowIndex) => {
@@ -9,7 +9,7 @@ const deleteRow = (ws, rowIndex) => {
 
   for (let R = rowIndex; R < range.e.r; ++R) {
     for (let C = range.s.c; C <= range.e.c; ++C) {
-      ws[encodeCell(R, C)] = ws[encodeCell(R+1, C)]
+      ws[encodeCell(R, C)] = ws[encodeCell(R + 1, C)]
     }
   }
 

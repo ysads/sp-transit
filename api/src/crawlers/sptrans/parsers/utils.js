@@ -13,6 +13,7 @@ module.exports = {
     const terminals = rawLine.split(' - ')[1].split('/')
 
     return {
+      terminalRaw: rawLine,
       terminalP: terminals[0],
       terminalS: terminals[1]
     }

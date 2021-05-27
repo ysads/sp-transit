@@ -15,7 +15,26 @@ const getRidershipLinksOf = async (year) => {
 
 (async function () {
   const links = await getRidershipLinksOf(2021)
-  const buffer = await getBuffer(links[0])
 
-  console.log(parser.parseFromBuffer(buffer))
+  const showRidershipOf = async (line) => {
+    console.log('========', line, '========')
+
+    for (let i = 0; i < 10; i++) {
+      const buffer = await getBuffer(links[i])
+      const allRiderships = parser.parseFromBuffer(buffer)
+      const ridership = allRiderships.find(c => c.lineCode === line)
+
+      console.log(ridership
+        ? {
+            lineCode: ridership.lineCode,
+            date: new Date(ridership.date).toDateString(),
+            total: ridership.total
+          }
+        : {}
+      )
+    }
+  }
+
+  await showRidershipOf('620010')
+  await showRidershipOf('640010')
 })()

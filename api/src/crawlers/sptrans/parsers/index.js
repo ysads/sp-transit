@@ -1,8 +1,8 @@
 const xlsxFromBuffer = require('../../../utils/xlsx')
-const Parser1 = require('./parser-1')
+const parser1 = require('./parser-1')
 
 const allParsers = [
-  Parser1
+  parser1
 ]
 
 const parseFromBuffer = (buffer) => {
